@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模板插值</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <style>
+    .class1{
+      background: #444;
+      color: #eee;
+    }
+    </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 普通插入值 -->
+    <p>{{ message }}</p>
+    <!-- 插入html -->
+    <div v-html ="message2"></div>  
+    <!-- 属性判断 -->
+    <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+    <br><br>
+    <div v-bind:class="{'class1': use}">
+      v-bind:class 指令
+    </div>
+    <!-- 表达式 -->
+    {{5+5}}<br>
+    {{ ok ? 'YES' : 'NO' }}<br>
+    {{ message.split('').reverse().join('') }}
+    <!-- v-bind用于绑定数据和元素属性 -->
+    <div v-bind:id="'list-' + id">菜鸟教程</div>
+    <a v-bind:href="url">click here</a>
+    <!-- v-if -->
+    <p v-if="seen">现在你看到我了</p>
+    <template v-if="ok">
+      <p>学的不仅是技术，更是梦想！</p>
+      <p>哈哈哈，打字辛苦啊！！！</p>
+    </template>
+    <br>
+    <pre><a v-bind:href="url">菜鸟教程</a></pre>
+    <!-- 用户输入 v-model 指令用来在 input、select、textarea、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。-->
+    <input v-model="message">
+    <br>
+    <!-- click 方法与点击事件-->
+    <button v-on:click="reverseMessage">反转字符串</button>
+  </div>
+  
+  <script>
+  //插入文本
+  new Vue({ 
+    el: '#app',
+    data: {
+      message: 'Hello Vue.js!',
+      message2: '菜鸟',
+      use: true,
+      ok: true,
+      url: "https://www.runoob.com/",
+      seen: true,
+     ok: true
+
+    },
+    methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join(' ')
+    }
+  }
+  })
+  </script>
+</body>
+</html>
